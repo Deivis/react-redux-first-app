@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     
-    './publi/reduxstagram'
+    './publi/reduxApp'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
