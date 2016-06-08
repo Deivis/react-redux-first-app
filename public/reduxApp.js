@@ -7,7 +7,7 @@ import css from './styles/style.styl';
 
 
 //Components, this will be imported the components created in the tutorial
-import Main from './components/Main';
+import App from './components/App';
 
 import Single from './components/Single';
 
@@ -24,7 +24,7 @@ import store, {history} from './store';
 const router = (
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path="/" component={Main}>
+			<Route path="/" component={App}>
 				<IndexRoute component={PhotoGrid}></IndexRoute>
 				<Route path="/view/:postId" component={Single}></Route>
 			</Route>

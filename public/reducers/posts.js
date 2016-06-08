@@ -5,6 +5,7 @@
 //3. Return the state
 
 const posts = (state=[], action) => {
+		console.log('Posts will change');
 		console.log('state ', state);
 		console.log('action ',action);
 		return state;
