@@ -1,20 +1,18 @@
 import React from 'react';
 
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
-const Main = React.createClass({ 
-	render(){
+//TODO: solve the warning that occurs in the line 12, is something bout special props https://gist.github.com/jimfb/fb2a04fe3fa4637d7d62
+const Main = (props) => { 
 		return(
 			<div>
 				<h1>
 					<Link to="/">XuXuSxtagram</Link>
 				</h1>
-				{React.cloneElement(this.props.children, this.props)}
+				{React.cloneElement(props.children, props)}
 			</div>
-
-		);
-	}
-});
+		);	
+};
 
 export default Main;
 

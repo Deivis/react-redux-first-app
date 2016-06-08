@@ -1,10 +1,22 @@
 import React from 'react';
 
-const Single = () => (
-	<div className="single-photo">		
-	Single XUXU
-	</div>
-);
+import Photo from './Photo';
+
+import Comments from './Comments';
+
+const Single = ({posts, params, comments, increment}) => {
+	const postId = params.postId;
+	let i = posts.reduce((pp,cp,idx)=>{ return pp || (cp.code === postId ? idx : pp ); }, null);
+	const post = posts[i];
+	const postComments = comments[postId] || [];
+	return (
+		<div className="single-photo">		
+			<Photo index={i} post={post} comments={comments} increment={increment} />
+			<Comments comments={postComments}/>
+		</div>
+	);
+};
 
 export default Single;
 
+ 
