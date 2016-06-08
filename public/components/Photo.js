@@ -5,7 +5,7 @@ import { Link }  from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Component which will render the photos
-const Photo = ({key,post,comments}) => (
+const Photo = ({index, post, comments, increment}) => (
 		<figure className="grid-figure">
 
 			<div className="grid-photo-wrap">
@@ -23,7 +23,7 @@ const Photo = ({key,post,comments}) => (
 			<figcaption>
 				<p>{post.caption}</p>
 				<div className="control-buttons">
-					<button className="likes">&hearts;{post.likes}</button>
+					<button className="likes" onClick={increment.bind(null,index)} >&hearts;{post.likes}</button>
 					<Link className="button" to={`/view/${post.code}`}>
 						<span className="comment-count">
 							<span className="speech-bubble"></span>

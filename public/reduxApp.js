@@ -34,4 +34,4 @@ const router = (
 
 const root = document.getElementById('root');
 
-render(router, root);
+render(router, root); 

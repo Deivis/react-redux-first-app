@@ -1,12 +1,14 @@
+import{ INCREMENT_LIKES, ADD_COMMENT, REMOVE_COMMENT } from './actionTypes';
+
 //Increment action
-const increment = (index) =>({
-	type:'INCREMENT_LIKES',
+export const increment = (index) =>({
+	type: INCREMENT_LIKES,
 	index
 });
 
 //Add comment
-const addComment = (postId, author, comment) =>({
-	type:'ADD_COMMENT',
+export const addComment = (postId, author, comment) =>({
+	type:ADD_COMMENT,
 	postId, 
 	author, 
 	comment
@@ -14,8 +16,8 @@ const addComment = (postId, author, comment) =>({
 
 
 //Remove comment
-const removeComment = (postId, i) =>({
-	type:'REMOVE_COMMENT',
+export const removeComment = (postId, i) =>({
+	type:REMOVE_COMMENT,
 	postId, 
 	i
 });

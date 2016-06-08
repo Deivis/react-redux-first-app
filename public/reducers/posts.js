@@ -1,3 +1,5 @@
+import { INCREMENT_LIKES } from '../actions/actionTypes';
+
 //A reducer takes in 3 things:
 
 //1. The action(info about what happened)
@@ -5,10 +7,17 @@
 //3. Return the state
 
 const posts = (state=[], action) => {
-		console.log('Posts will change');
-		console.log('state ', state);
-		console.log('action ',action);
-		return state;
+		switch(action.type){
+			case INCREMENT_LIKES:
+				let i = action.index;
+				return [
+					...state.slice(0,i),
+					{...state[i], likes: state[i].likes + 1},
+					...state.slice(i + 1)
+				];
+			default:
+				return state;
+		}		
 };
 
 export default posts;
