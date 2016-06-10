@@ -14,7 +14,6 @@ export const addComment = (postId, author, comment) =>({
 	comment
 });
 
-
 //Remove comment
 export const removeComment = (postId, index) =>({
 	type:REMOVE_COMMENT,
