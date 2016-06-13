@@ -5,7 +5,6 @@ import {render} from 'react-dom';
 //Import css, this will be imported by the webpack and injected on the app
 import css from './styles/style.styl';
 
-
 //Components, this will be imported the components created in the tutorial
 import App from './components/App';
 
@@ -20,7 +19,6 @@ import { Provider } from 'react-redux';
 
 //Our store + history from store
 import store, {history} from './store';
-
 
 const router = (
 	<Provider store={store}>
