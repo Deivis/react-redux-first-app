@@ -4,7 +4,7 @@ import * as types from '../../public/actions/actionTypes';
 
 import expect from 'expect';
 
-describe('actions', ()=>{
+describe('actions: ', ()=>{
 
 	it('Should create an action to add a comment', () => {
 		const comment ="asd";

@@ -3,14 +3,12 @@ import { ADD_COMMENT, REMOVE_COMMENT } from '../actions/actionTypes';
 const comments = (state=[], action) => {
 		if(typeof action.postId !== 'undefined'){
 			
-			return {
-		
+			return Object.assign({},		
 				//current state
-				...state,
-		
+				state,		
 				// overwrite this post with a new one
-				[action.postId]: postComments(state[action.postId],action)
-			}
+				{ [action.postId]: postComments(state[action.postId],action) }
+			);
 		}
 
 		return state;

@@ -13,7 +13,7 @@ const posts = (state=[], action) => {
 
 				return [
 					...state.slice(0,i),
-					{...state[i], likes: state[i].likes + 1},
+					Object.assign({}, state[i],{likes: state[i].likes + 1}),
 					...state.slice(i + 1)
 				];
 
