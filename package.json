@@ -4,11 +4,11 @@
   "description": "Example used to learn redux with react",
   "main": "server.js",
   "scripts": {
-    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "test": "mocha tests/**/*.spec.js --compilers js:babel-core/register",
+    "test": "set BABEL_ENV=test && mocha tests/**/*.spec.js --compilers js:babel-core/register",
     "clean": "rimraf dist",
-    "start": "node server.js"
+    "start": "set BABEL_ENV=development && node server.js"
   },
   "repository": {
     "type": "git",
@@ -58,9 +58,10 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "devDependencies": {
+    "babel-preset-react-hmre": "^1.1.1",
     "expect": "^1.20.1",
     "expect-jsx": "^2.5.1",
     "mocha": "^2.5.3",
-    "react-addons-test-utils": "^15.0.2"
+    "react-addons-test-utils": "^15.1.0"
   }
 }
