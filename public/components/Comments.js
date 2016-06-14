@@ -29,9 +29,8 @@ const Comments = React.createClass({
 	},
 
 	render(){
-		const { postId } = this.props.params;
-		const { comments } = this.props;
-		
+		const {postId} = this.props.params;
+		const {comments} = this.props;
 		return( 
 			<div className="comments">
 
