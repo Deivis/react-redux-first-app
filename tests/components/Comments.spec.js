@@ -4,14 +4,14 @@ import jsdomify from 'jsdomify';
 
 import React from 'react';
 
-import TestUtils from 'react-addons-test-utils'
+import TestUtils from 'react-addons-test-utils';
 
-import Comments from '../../public/components/Comments'
+import Comments from '../../public/components/Comments';
 
 import comments from '../../public/data/comments';
 
 /*
-	This is my first component test specs, so i will use diferent approaches to testing the Comments component
+	This is my first component test specs, so, i will use diferent approaches to testing the Comments component
 	and learnd about tests in react components in redux architecture
 */
 
