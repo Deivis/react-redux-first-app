@@ -1,7 +1,5 @@
 import expect  from 'expect';
 
-import jsdomify from 'jsdomify';
-
 import React from 'react';
 
 import TestUtils from 'react-addons-test-utils';
