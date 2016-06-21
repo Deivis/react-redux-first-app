@@ -1,29 +1,8 @@
 {
-  "name": "react-redux-first-app",
-  "version": "1.0.0",
-  "description": "Example used to learn redux with react",
-  "main": "./server/src/app.js",
-  "scripts": {
-    "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
-    "test": "set BABEL_ENV=test && mocha tests/**/*.spec.js --compilers js:babel-core/register",
-    "clean": "rimraf dist",
-    "start": "set BABEL_ENV=development && node ./server/src/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Deivis/react-redux-first-app.git"
-  },
-  "keywords": [
-    "react-redux",
-    "example"
-  ],
   "author": "Deivis",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Deivis/react-redux-first-app/issues"
   },
-  "homepage": "https://github.com/Deivis/react-redux-first-app#readme",
   "dependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
@@ -57,6 +36,7 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
+  "description": "Example used to learn redux with react",
   "devDependencies": {
     "babel-preset-react-hmre": "^1.1.1",
     "expect": "^1.20.1",
@@ -66,5 +46,25 @@
     "react-addons-test-utils": "^15.1.0",
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
-  }
+  },  
+  "homepage": "https://github.com/Deivis/react-redux-first-app#readme",
+  "keywords": [
+    "react-redux",
+    "example"
+  ],
+  "license": "MIT",
+  "main": "./server/src/app.js",
+  "name": "react-redux-first-app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deivis/react-redux-first-app.git"
+  },
+  "scripts": {
+    "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js",
+    "build": "npm run clean && npm run build:webpack",
+    "test": "set BABEL_ENV=test && mocha tests/**/*.spec.js --compilers js:babel-core/register",
+    "clean": "rimraf dist",
+    "start": "set BABEL_ENV=development && node ./server/src/app.js"
+  },
+  "version": "1.0.0"
 }
