@@ -4,6 +4,10 @@ import server from '../../server/src/app';
 
 import expect from 'expect';  
 
+import posts from '../../server/src/data/posts';
+
+import comments from '../../server/src/data/comments';
+
 describe('Routing', () => {
 
 	it('Should return the main page', (done) =>{
@@ -29,11 +33,13 @@ describe('Routing', () => {
 		  .end(function(err, res){
 		    if (err) throw err;
 		    
+		    let data = res.body;
+
 		    expect(res).toExist('The response object must exist');
+		    
+		    expect(data).toEqual(posts,'The body must to be an array of posts');	
 
-		    expect(res.body).toBeA('array','The body must to be an array');	
-
-		    expect(res.body.length).toBeGreaterThan(0,'The response array can not to be empty');	
+		    expect(data.length).toBeGreaterThan(0,'The response array can not to be empty');	
 		    
 		    done();		    
 		  });
@@ -47,11 +53,13 @@ describe('Routing', () => {
 		  .end(function(err, res){
 		    if (err) throw err;
 		    
+		    let data = res.body;
+
 		    expect(res).toExist('The response object must exist');
 
-		    expect(res.body).toBeA('array','The body must to be an array');	
+		    expect(data).toBeA('object','The response data must be an object');	
 
-		    expect(res.body.length).toBeGreaterThan(0,'The response array can not to be empty');	
+		    expect(data).toEqual(comments,'The body must to be an object of comments');	
 		    
 		    done();		    
 		  });
