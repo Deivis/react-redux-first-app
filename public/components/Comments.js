@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
-const Comments = React.createClass({
+class Comments extends Component {
+
 	renderComment(postId, comment,index){
 		
 		return(
@@ -18,7 +19,7 @@ const Comments = React.createClass({
 
 			</div>
 		)
-	},
+	}
 
 	handleSubmit(postId, e){
 		e.preventDefault();
@@ -26,11 +27,13 @@ const Comments = React.createClass({
 	 	const comment = this.refs.comment.value;
 	 	this.props.addComment(postId,author,comment);
 	 	this.refs.commentForm.reset();
-	},
+	}
 
 	render(){
 		const {postId} = this.props.params;
 		const {comments} = this.props;
+		const {fetchPostsIfNeeded} = this.props;
+
 		return( 
 			<div className="comments">
 
@@ -49,6 +52,14 @@ const Comments = React.createClass({
 			</div>
 		);
 	}
-});
+};
+
+Comments.propTypes = {
+	addComment: PropTypes.func.isRequired,
+	comments: PropTypes.array.isRequired,
+  params: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
+  removeComment:  PropTypes.func.isRequired  
+}
 
 export default Comments;

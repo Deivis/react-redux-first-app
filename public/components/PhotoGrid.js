@@ -5,7 +5,7 @@ import Photo from './Photo';
 const PhotoGrid = ({posts, comments, increment}) => (
 	<div className="photo-grid">
 
-		{posts.map((post,i) => <Photo key={i} index={i} post={post} comments={comments} increment={increment} />)}		
+		{posts.items.map((post,i) => <Photo key={i} index={i} post={post} comments={comments} increment={increment} />)}		
 		
 	</div>
 );

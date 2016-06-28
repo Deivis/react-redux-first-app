@@ -1,24 +1,27 @@
-import {createStore, compose} from 'redux';
+import {createStore, compose, applyMiddleware } from 'redux';
 import { syncHistoryWithStore} from 'react-router-redux';
 import {browserHistory} from 'react-router';
+import thunkMiddleware from 'redux-thunk';
 
 //Import the root reducer
 import rootReducer from './reducers/index';
 
-//Import static data
-import comments from './data/comments';
-import posts from './data/posts';
-
 //Create an object for the default data
 const defaultState = {
-	posts,
-	comments
+	posts: {
+		isFetching: false,
+		items:[]
+	},
+	comments:{
+		isFetching: false,
+		items: []
+	}
 };
 
 //Extension which provides a connection whith the redux chrome dev tools 
-const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
+const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f;
 
-const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(rootReducer, defaultState, compose(applyMiddleware(thunkMiddleware),devTools));
 
 export const history = syncHistoryWithStore(browserHistory,store);
 

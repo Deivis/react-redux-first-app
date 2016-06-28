@@ -6,6 +6,7 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,

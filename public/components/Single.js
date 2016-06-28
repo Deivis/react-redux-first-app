@@ -1,26 +1,44 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import Photo from './Photo';
 
 import Comments from './Comments';
 
-const Single = ({posts, params, comments, increment, addComment, removeComment}) => {
-	const postId = params.postId;
-	let i = posts.reduce((pp,cp,idx)=>{ return pp || (cp.code === postId ? idx : pp ); }, null);
-	const post = posts[i];
-	const postComments = comments[postId] || [];
-	
-	return (
-		<div className="single-photo">		
+class Single extends Component {  
 
-			<Photo index={i} post={post} comments={comments} increment={increment} />
+	componentDidMount() {
+		let {fetchCommentsIfNeeded, params} = this.props;
+		let {postId} = params;		
+    fetchCommentsIfNeeded(postId);
+  }
 
-			<Comments comments={postComments} params={params} addComment={addComment} removeComment={removeComment} />
-			
-		</div>
-	);
+	render() {
+		const { params, posts, comments, addCommentIfCan, removeComment, increment } = this.props;
+		let postId = params.postId;
+		let i = posts.items.reduce((pp,cp,idx)=>{ return pp || (cp.code === postId ? idx : pp ); }, null);
+		let postComments = comments && comments.items ? comments.items : [];
+		let post = posts.items[i] || {}; 
+		
+		return (
+			<div className="single-photo">		
+
+				<Photo index={i} post={post} comments={postComments} increment={increment} />
+
+				<Comments postId={postId} comments={postComments} params={params} addComment={addCommentIfCan} removeComment={removeComment} />
+				
+			</div>
+		);
+	}
 };
 
-export default Single;
+Single.propTypes = {
+	addComment: PropTypes.func,
+	comments: PropTypes.object,
+  fetchCommentsIfNeeded: PropTypes.func,
+  increment: PropTypes.func,
+  posts: PropTypes.object,
+  params: PropTypes.object, 
+  removeComment:  PropTypes.func  
+}
 
- 
+export default Single; 

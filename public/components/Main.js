@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import { Link } from 'react-router';
 
 //TODO: solve the warning that occurs in the line 12, is something bout special props https://gist.github.com/jimfb/fb2a04fe3fa4637d7d62
-const Main = (props) => { 
+class Main extends Component { 
+
+	componentDidMount() {
+		const {fetchPostsIfNeeded} = this.props;
+		console.log(this.props.posts);
+    fetchPostsIfNeeded();
+  }
+
+	render(){
 		return(
 			<div>
 
@@ -13,11 +21,17 @@ const Main = (props) => {
 
 				</h1>
 
-				{React.cloneElement(props.children, props)}
+				{React.cloneElement(this.props.children, this.props)}
 				
 			</div>
 		);	
+	}
 };
 
-export default Main;
+Main.propTypes = {
+  posts: PropTypes.object.isRequired,
+  comments: PropTypes.object.isRequired,
+  fetchPostsIfNeeded: PropTypes.func.isRequired
+}
 
+export default Main;

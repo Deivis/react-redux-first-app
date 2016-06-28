@@ -38,7 +38,7 @@ const Photo = ({index, post, comments, increment}) => (
 
 							<span className="speech-bubble"></span>
 
-							{comments[post.code] ? comments[post.code].length: 0}
+							{comments ? comments.length: 0}
 
 						</span>
 
