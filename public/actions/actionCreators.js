@@ -11,8 +11,8 @@ export const addCommentIfCan = (postId, author, comment) => {
 
 	return (dispatch, getState) => {
 		if(canAddComment(getState())){
-	    dispatch(postComments(postId));
-	   	return addComment(dispatch, { postId, author, comment });
+	    addComment(dispatch, { postId, author, comment });
+	   	return dispatch(postComments(postId));
     }
   }
 };
@@ -47,11 +47,42 @@ export const receivePostedComment =(postId, json) =>({
 });
 
 //Remove comment
-export const removeComment = (postId, index) =>({
-	type: types.REMOVE_COMMENT,
+export const removeComment = (postId, index) => {
+
+	return (dispatch, getState) => {
+		if(canRemoveComment(getState(), index)){
+	   
+	    deleteComment(dispatch, postId, index);
+	   	
+	   	return dispatch({
+				type: types.REMOVE_COMMENT,
+				postId, 
+				index	   		
+	   	});
+    }
+  }
+};
+
+const deleteComment = (dispatch, postId, index) =>{
+
+	return fetch(`/comments/${postId}`,
+						{ 
+ 		 					method:'DELETE', 
+ 							body: index
+ 						})
+	      .then(response => response.json())
+	      .then(json => dispatch(receiveRemovedCommentIndex(postId, json)));
+}
+
+
+const receiveRemovedCommentIndex = (postId,index) =>({
+	type: types.RECEIVE_REMOVED_COMMENT,
 	postId, 
-	index
+	index,
+	confirmedAt:Date.now()
 });
+
+const canRemoveComment = (state, commentIndex) => !state.isFetching && state.comments.items[commentIndex];
 
 //Request the posts to the server
 export const requestPosts =() =>({

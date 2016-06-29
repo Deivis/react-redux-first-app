@@ -31,8 +31,8 @@ class Comments extends Component {
 
 	render(){
 		const {postId} = this.props.params;
-		const {comments} = this.props;
-		const {fetchPostsIfNeeded} = this.props;
+		const {comments, isFetching, fetchPostsIfNeeded} = this.props;	
+		let overlayClass = isFetching ? 'comment-overlay' : 'invisible';
 
 		return( 
 			<div className="comments">
@@ -40,6 +40,10 @@ class Comments extends Component {
 				{ comments.map(this.renderComment.bind(this,postId)) }
 
 				<form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this,postId)}>
+				
+				<span  className={overlayClass} >
+					<span className="comment-overlay-loading"></span>
+				</span>
 
 					<input type="text" ref="author" placeholder="author" />
 
@@ -57,9 +61,10 @@ class Comments extends Component {
 Comments.propTypes = {
 	addComment: PropTypes.func.isRequired,
 	comments: PropTypes.array.isRequired,
+	isFetching: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
-  removeComment:  PropTypes.func.isRequired  
+  removeComment:  PropTypes.func.isRequired
 }
 
 export default Comments;

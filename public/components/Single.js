@@ -24,7 +24,7 @@ class Single extends Component {
 
 				<Photo index={i} post={post} comments={postComments} increment={increment} />
 
-				<Comments postId={postId} comments={postComments} params={params} addComment={addCommentIfCan} removeComment={removeComment} />
+				<Comments postId={postId} comments={postComments} params={params} addComment={addCommentIfCan} isFetching={comments.isFetching} removeComment={removeComment} />
 				
 			</div>
 		);

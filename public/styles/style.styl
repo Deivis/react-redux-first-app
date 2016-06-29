@@ -2,6 +2,15 @@
 @import '_typography.styl'
 @import '_animations.styl'
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body
   background offwhite
 
@@ -69,6 +78,9 @@ body
   &:hover
     .remove-comment
       opacity 1
+
+.comment-form
+  position absolute
  
 .comment-form 
   input, textarea
@@ -80,6 +92,32 @@ body
     outline none
     resize vertical
 
+.comment-overlay
+  position absolute
+  left 0
+  top 0
+  bottom 0
+  right 0
+  background-color black
+  opacity 0.25
+  display flex
+  align-items: center
+  justify-content: center
+
+.comment-overlay-loading
+  border-radius: 50%
+  width: 30px
+  height: 30px
+  border: .25rem solid rgba(white, 0.2)
+  border-top-color: white
+  animation: spin 1s infinite linear
+  &--double 
+    border-style: double
+    border-width: .5rem  
+  
+
+.invisible
+  display: none
 
 .grid-photo-wrap
   position relative

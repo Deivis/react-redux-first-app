@@ -15,7 +15,24 @@ router.get('/:postId', function (req, res) {
 router.post('/:postId', function (req, res) {
 	let newComment = JSON.parse(req.body);
 	//TODO: create a database or use the filesystem to save this new comment in the post which the id received
-  res.send(newComment);
+
+	//Just a time mock to force the app to wait for the response
+	setTimeout(()=>{
+		res.send(newComment);
+	}, 1000);  
 });
+
+// just a mock post to test the async actions on the client
+router.delete('/:postId', function (req, res) {
+	let index = req.body;
+	
+	//TODO: create a database or use the filesystem to remove this comment
+
+	//Just a time mock to force the app to wait for the response
+	setTimeout(()=>{
+		res.send(index);
+	}, 1000);  
+});
+
 
 module.exports = router;

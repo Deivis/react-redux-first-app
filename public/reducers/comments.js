@@ -1,28 +1,12 @@
-import { ADD_COMMENT, REMOVE_COMMENT, RECEIVE_COMMENTS, REQUEST_COMMENTS,POST_COMMENTS, RECEIVE_POSTED_COMMENT } from '../actions/actionTypes';
+import { ADD_COMMENT, REMOVE_COMMENT, RECEIVE_COMMENTS, REQUEST_COMMENTS,POST_COMMENT, RECEIVE_POSTED_COMMENT, RECEIVE_REMOVED_COMMENT } from '../actions/actionTypes';
 
 const comments = (state= {
 		isFetching: false,
 		items: []
 	}, action) => {
-		if(typeof action.postId !== 'undefined'){
-			
-			return Object.assign({},		
-				//current state
-				state,
-				postComments(state,action)
-			);
-		}
-
-		return state;
-};
-
-const postComments = (state= {
-		isFetching: false,
-		items: []
-	}, action) => {
 		switch(action.type){
 
-			case POST_COMMENTS:
+			case POST_COMMENT:
 				return Object.assign({}, state, {
 					isFetching: true
 				});
@@ -58,6 +42,13 @@ const postComments = (state= {
 						]
 					}
 				);
+
+			case RECEIVE_REMOVED_COMMENT:
+				return Object.assign({}, state, {
+					index: action.index,
+					postId: action.postId,
+					confirmadAt: action.confirmedAt
+				});
 			
 			case REQUEST_COMMENTS:
 
@@ -67,6 +58,7 @@ const postComments = (state= {
 				});
 
 			case RECEIVE_COMMENTS:
+
 				//Receive the comments from the server
 				return Object.assign({}, state, {
 					isFetching: false,
