@@ -30,7 +30,7 @@ class Comments extends Component {
 	}
 
 	render(){
-		const {postId} = this.props.params;
+		const postId = this.props.postId;
 		const {comments, isFetching, fetchPostsIfNeeded} = this.props;	
 		let overlayClass = isFetching ? 'comment-overlay' : 'invisible';
 
@@ -62,7 +62,6 @@ Comments.propTypes = {
 	addComment: PropTypes.func.isRequired,
 	comments: PropTypes.array.isRequired,
 	isFetching: PropTypes.bool.isRequired,
-  params: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   removeComment:  PropTypes.func.isRequired
 }

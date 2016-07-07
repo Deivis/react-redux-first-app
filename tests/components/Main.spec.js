@@ -17,8 +17,16 @@ import posts from '../../public/data/posts';
 const setup = () => {
 	const props = {
 		children: <PhotoGrid />,
-		posts: posts, 
-   	comments: comments, 
+		posts:{
+			isIncrementingLikes: false,
+			isFetching: false,
+			items: posts
+		},
+   	comments:{
+			isFetching: false,
+			items: comments
+		}, 
+		fetchPostsIfNeeded: expect.createSpy(),
    	addComment: expect.createSpy(),
    	increment: expect.createSpy(),
    	removeComment: expect.createSpy()

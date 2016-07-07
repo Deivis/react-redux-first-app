@@ -9,6 +9,7 @@ import rootReducer from './reducers/index';
 //Create an object for the default data
 const defaultState = {
 	posts: {
+		isIncrementingLikes: false,
 		isFetching: false,
 		items:[]
 	},

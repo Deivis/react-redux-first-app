@@ -19,11 +19,18 @@ import posts from '../../public/data/posts';
 const setup = () => {
 	const postId = 'BAhvZrRwcfu';
 	const props = {
-		posts: posts, 
-		params: {
+		posts:{
+			isIncrementingLikes: false,
+			isFetching: false,
+			items: posts
+		}, 
+		params:{
   		postId: postId
   	}, 
-		comments: comments, 
+		comments:{
+			isFetching: false,
+			items: comments
+		}, 
 		increment: expect.createSpy(), 
 		addComment: expect.createSpy(), 
 		removeComment: expect.createSpy()

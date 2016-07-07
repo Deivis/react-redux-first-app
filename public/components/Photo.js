@@ -5,7 +5,7 @@ import { Link }  from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Component which will render the photos
-const Photo = ({index, post, comments, increment}) => (
+const Photo = ({index, post, comments, increment, isIncrementingLikes}) => (
 		<figure className="grid-figure">
 
 			<div className="grid-photo-wrap">

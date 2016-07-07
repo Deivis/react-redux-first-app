@@ -22,9 +22,9 @@ class Single extends Component {
 		return (
 			<div className="single-photo">		
 
-				<Photo index={i} post={post} comments={postComments} increment={increment} />
+				<Photo index={i} post={post} comments={postComments} increment={increment} isIncrementingLikes={posts.isIncrementingLikes} />
 
-				<Comments postId={postId} comments={postComments} params={params} addComment={addCommentIfCan} isFetching={comments.isFetching} removeComment={removeComment} />
+				<Comments postId={postId} comments={postComments} addComment={addCommentIfCan} isFetching={comments.isFetching} removeComment={removeComment} />
 				
 			</div>
 		);

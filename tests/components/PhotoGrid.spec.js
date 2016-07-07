@@ -16,8 +16,15 @@ import posts from '../../public/data/posts';
 
 const setup = () => {
   const props ={
-   	posts: posts, 
-   	comments: comments, 
+   	posts: {
+   		isIncrementingLikes: false,
+			isFetching: false,
+   		items:posts
+   	}, 
+   	comments: {
+			isFetching: false,
+   		items:comments
+   	}, 
    	increment: expect.createSpy()
   };
 

@@ -18,11 +18,10 @@ import comments from '../../public/data/comments';
 const setup = () => {
 	const postId = 'BAhvZrRwcfu';
   const props = { 
-  	params: {
-  		postId: postId
-  	},
-  	comments: comments[postId],
-  	addComment: expect.createSpy(),
+    addComment: expect.createSpy(),
+    comments: comments[postId],
+ 		isFetching: false,
+    postId: postId,
   	removeComment: expect.createSpy()
   };
 
