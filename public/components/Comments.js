@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 class Comments extends Component {
 
 	renderComment(postId, comment,index){
-		
+
 		return(
 			<div className="comment" key={index}>
 
@@ -13,7 +13,7 @@ class Comments extends Component {
 
 					{comment.text}
 
-					<button className="remove-comment" onClick={ this.props.removeComment.bind(null, postId,index) } >&times;</button>
+					<button className="remove-comment" onClick={ this.props.removeComment.bind(null, postId, index, "") } >&times;</button>
 
 				</p>
 
@@ -31,16 +31,16 @@ class Comments extends Component {
 
 	render(){
 		const postId = this.props.postId;
-		const {comments, isFetching, fetchPostsIfNeeded} = this.props;	
+		const {comments, isFetching, fetchPostsIfNeeded} = this.props;
 		let overlayClass = isFetching ? 'comment-overlay' : 'invisible';
 
-		return( 
+		return(
 			<div className="comments">
 
 				{ comments.map(this.renderComment.bind(this,postId)) }
 
 				<form ref="commentForm" className="comment-form" onSubmit={this.handleSubmit.bind(this,postId)}>
-				
+
 				<span  className={overlayClass} >
 					<span className="comment-overlay-loading"></span>
 				</span>
@@ -52,7 +52,7 @@ class Comments extends Component {
 					<input type="submit" hidden />
 
 				</form>
-				
+
 			</div>
 		);
 	}

@@ -6,33 +6,38 @@ export const increment = (index) =>({
 	index
 });
 
-//Add comment
-export const addCommentIfCan = (postId, author, comment) => {
+//Add comment if is possible
+export const addCommentIfCan = (postId, author, comment, origin) => {
 
 	return (dispatch, getState) => {
 		if(canAddComment(getState())){
-	    addComment(dispatch, { postId, author, comment });
-	   	return dispatch(postComments(postId));
+			dispatch(postComments(postId));
+	   	return addComment(dispatch, { postId, author, comment }, origin);
     }
   }
 };
 
-const addComment = (dispatch, comment) => {
+//Trigger a fetch call to save a comment into the server
+const addComment = (dispatch, comment, origin) => {
+	origin = origin || '';
+	const uri = `${origin}/comments/${comment.postId}`;
 
-	return fetch(`/comments/${comment.postId}`,
-						{ 
- 		 					method:'POST', 
+	return window.fetch(uri,
+						{
+ 		 					method:'POST',
  							body: JSON.stringify( comment )
  						})
 	      .then(response => response.json())
 	      .then(json => dispatch(receivePostedComment(comment.postId, json)));
 }
 
+//Validates if a comment can be added
 const canAddComment = (state) => {
 
 	return !state.isFetching;
 }
 
+//Indicates a post were posted to the server
 export const postComments = (postId) =>({
 	type: types.POST_COMMENT
 })
@@ -46,42 +51,48 @@ export const receivePostedComment =(postId, json) =>({
 	receivedAt: Date.now()
 });
 
-//Remove comment
-export const removeComment = (postId, index) => {
+//Remove comment if is possible
+export const removeComment = (postId, index, origin) => {
 
 	return (dispatch, getState) => {
 		if(canRemoveComment(getState(), index)){
-	   
-	    deleteComment(dispatch, postId, index);
-	   	
-	   	return dispatch({
-				type: types.REMOVE_COMMENT,
-				postId, 
-				index	   		
-	   	});
+
+			dispatch(deleteComment(postId, index));
+
+	   	return deleteCommentFromServer(dispatch, postId, index, origin);
     }
   }
 };
 
-const deleteComment = (dispatch, postId, index) =>{
+// Remove comment
+export const deleteComment = (postId, index) => ({
+	type: types.REMOVE_COMMENT,
+	postId,
+	index
+});
 
-	return fetch(`/comments/${postId}`,
-						{ 
- 		 					method:'DELETE', 
- 							body: index
- 						})
-	      .then(response => response.json())
-	      .then(json => dispatch(receiveRemovedCommentIndex(postId, json)));
+// Trigger a fetch call to delete the comment from the server
+const deleteCommentFromServer = (dispatch, postId, index, origin) =>{
+	origin = origin || '';
+	const uri = `${origin}/comments/${postId}/${index}`;
+
+	return	window.fetch(uri,
+											{
+					 		 					method:'DELETE'
+					 						})
+					    	.then(response => response.json())
+					      .then(json => dispatch(receiveRemovedCommentIndex(postId, json)));
 }
 
-
+//Receive the removed comment old index
 const receiveRemovedCommentIndex = (postId,index) =>({
 	type: types.RECEIVE_REMOVED_COMMENT,
-	postId, 
+	postId,
 	index,
 	confirmedAt:Date.now()
 });
 
+// validates if the state is not fetching and if the comment exists
 const canRemoveComment = (state, commentIndex) => !state.isFetching && state.comments.items[commentIndex];
 
 //Request the posts to the server
@@ -110,24 +121,30 @@ export const receiveComments =(postId, json) =>({
 	receivedAt: Date.now()
 });
 
+//Fetch the posts from server
 const fetchPosts = () => {
   return dispatch => {
     dispatch(requestPosts());
-    return fetch('/posts')
-      .then(response => response.json())
-      .then(json => dispatch(receivePosts(json)));
+    return window.fetch('/posts')
+						      .then(response => response.json())
+						      .then(json => dispatch(receivePosts(json)));
   }
 }
 
-const fetchComments = (postId) => {
+//Fetch the comment from server
+const fetchComments = (postId, origin) => {
+	origin = origin || '';
+	const uri = `${origin}/comments/${postId}`;
+
   return dispatch => {
     dispatch(requestComments(postId));
-    return fetch(`/comments/${postId}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveComments(postId, json)));
+    return window.fetch(uri)
+						      .then(response => response.json())
+						      .then(json => dispatch(receiveComments(postId, json)));
   }
 }
 
+//Validates if is possible fetch posts
 function shouldFetchPosts(state, action) {
   const posts = state.posts;
   if (( posts && posts.items && posts.items.length > 0 ) || posts.isFetching) {
@@ -136,14 +153,16 @@ function shouldFetchPosts(state, action) {
   return true;
 }
 
+//Validates if is possible fetch comments
 const shouldFetchComments = (state, postId) =>{
   const comments = state.comments;
   if (( comments && comments.items && comments.items[postId] ) || comments.isFetching) {
     return false;
   }
-  return true;  
+  return true;
 }
 
+//Fetch posts if is necessery
 export const fetchPostsIfNeeded = () => {
 	return (dispatch, getState) => {
     if (shouldFetchPosts(getState())) {
@@ -152,10 +171,11 @@ export const fetchPostsIfNeeded = () => {
   }
 }
 
-export const fetchCommentsIfNeeded = (postId) => {
+//Fetch comments if is necessery
+export const fetchCommentsIfNeeded = (postId, origin) => {
 	return (dispatch, getState) => {
     if (shouldFetchComments(getState(), postId)) {
-      return dispatch(fetchComments(postId));
+      return dispatch(fetchComments(postId, origin));
     }
   }
 }

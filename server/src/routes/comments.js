@@ -21,19 +21,19 @@ router.post('/:postId', function (req, res) {
 	//Just a time mock to force the app to wait for the response
 	setTimeout(()=>{
 		res.send(newComment);
-	}, 1000);  
+	}, 1000);
 });
 
 // just a mock post to test the async actions on the client
-router.delete('/:postId', function (req, res) {
-	let index = req.body;
-	
+router.delete('/:postId/:commentIndex', function (req, res) {
+	let index = req.params.commentIndex;
+
 	//TODO: create a database or use the filesystem to remove this comment
 
 	//Just a time mock to force the app to wait for the response
 	setTimeout(()=>{
 		res.send(index);
-	}, 1000);  
+	}, 1000);
 });
 
 

@@ -14,9 +14,9 @@ const comments = (state= {
 			case RECEIVE_POSTED_COMMENT:
 
 				// return the new state with the new comment received from the server
-				return Object.assign({},		
+				return Object.assign({},
 					state,
-					{ 
+					{
 						isFetching: false,
 						items:
 					  [...state.items,
@@ -32,10 +32,10 @@ const comments = (state= {
 			case REMOVE_COMMENT:
 
 				// return the new state without the removed comment
-				return Object.assign({},		
+				return Object.assign({},
 					state,
 					{ items:[
-						
+
 						// from the start to the comment which we want to delete
 						...state.items.slice(0,action.index),
 						...state.items.slice(action.index + 1)
@@ -44,12 +44,13 @@ const comments = (state= {
 				);
 
 			case RECEIVE_REMOVED_COMMENT:
+
 				return Object.assign({}, state, {
 					index: action.index,
 					postId: action.postId,
 					confirmadAt: action.confirmedAt
 				});
-			
+
 			case REQUEST_COMMENTS:
 
 				// return a state which don't have data but have the attribute isFetching.
@@ -69,7 +70,7 @@ const comments = (state= {
 			default:
 
 				return state;
-		}		
+		}
 };
 
 export default comments;

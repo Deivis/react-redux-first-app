@@ -1,6 +1,9 @@
 import {createStore, compose, applyMiddleware } from 'redux';
+
 import { syncHistoryWithStore} from 'react-router-redux';
+
 import {browserHistory} from 'react-router';
+
 import thunkMiddleware from 'redux-thunk';
 
 //Import the root reducer
@@ -19,7 +22,7 @@ const defaultState = {
 	}
 };
 
-//Extension which provides a connection whith the redux chrome dev tools 
+//Extension which provides a connection whith the redux chrome dev tools
 const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f;
 
 const store = createStore(rootReducer, defaultState, compose(applyMiddleware(thunkMiddleware),devTools));
