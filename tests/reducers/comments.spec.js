@@ -7,13 +7,14 @@ import expect  from 'expect';
 
 describe('comments reducer: ', () => {
 	const initialState = {
-	  BAhvZrRwcfu:[
+		isFetching:false,
+	  items:[
 	    {
 	      text:'Totally need to try this.',
 	      user:'heavymetaladam'
 	    }
 	  ]
-	};	
+	};
 	const postId = 'BAhvZrRwcfu';
 	const author = 'test';
 	const comment = 'xuxu';
@@ -21,18 +22,41 @@ describe('comments reducer: ', () => {
 	let expectedState;
 
 	it('Should add a comment and return a new state', () => {
-		expectedState = {};
-		expectedState[postId] = [ ...initialState[postId], { text: comment, 'user':author  }];
-		action = actions.addComment(postId, author, comment);
+		expectedState = {
+			isFetching: false,
+		  items: [ ...initialState.items,
+				{ text: comment, 'user':author }
+		  ],
+			lastUpdated: Date.now()
+		};
+
+		action = actions.addCommentIfCan(postId, author, comment);
 
 		expect(comments(initialState, action))
-			.toEqual(expectedState);
+			.toNotEqual(expectedState);
+
+		action = actions.receivePostedComment(postId, {author, comment});
+
+		const reduceReturn = comments(initialState, action);
+
+		expect(reduceReturn.isFetching)
+			.toEqual(expectedState.isFetching);
+
+		expect(reduceReturn.items)
+			.toEqual(expectedState.items);
+
+		expect(reduceReturn.lastUpdated)
+			.toBeGreaterThanOrEqualTo(expectedState.lastUpdated);
+
 	});
 
-	it('Should remove a comment and return a new state', () => {
-		expectedState = {}
-		expectedState[postId] = [];
-		action = actions.removeComment(postId,0);
+	it('Should delete a comment and return a new state', () => {
+		expectedState = {
+			isFetching: false,
+			items: []
+		}
+
+		action = actions.deleteComment(postId,0);
 
 		expect(comments(initialState, action))
 			.toEqual(expectedState);

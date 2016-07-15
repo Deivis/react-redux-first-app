@@ -11,7 +11,7 @@ export const addCommentIfCan = (postId, author, comment, origin) => {
 
 	return (dispatch, getState) => {
 		if(canAddComment(getState())){
-			dispatch(postComments(postId));
+			dispatch(postComment(postId));
 	   	return addComment(dispatch, { postId, author, comment }, origin);
     }
   }
@@ -38,7 +38,7 @@ const canAddComment = (state) => {
 }
 
 //Indicates a post were posted to the server
-export const postComments = (postId) =>({
+export const postComment = (postId) =>({
 	type: types.POST_COMMENT
 })
 
@@ -55,6 +55,7 @@ export const receivePostedComment =(postId, json) =>({
 export const removeComment = (postId, index, origin) => {
 
 	return (dispatch, getState) => {
+		
 		if(canRemoveComment(getState(), index)){
 
 			dispatch(deleteComment(postId, index));
@@ -93,7 +94,7 @@ const receiveRemovedCommentIndex = (postId,index) =>({
 });
 
 // validates if the state is not fetching and if the comment exists
-const canRemoveComment = (state, commentIndex) => !state.isFetching && state.comments.items[commentIndex];
+const canRemoveComment = (state, commentIndex) => !state.isFetching && !!(state.comments.items[commentIndex]);
 
 //Request the posts to the server
 export const requestPosts =() =>({

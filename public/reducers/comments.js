@@ -12,7 +12,6 @@ const comments = (state= {
 				});
 
 			case RECEIVE_POSTED_COMMENT:
-
 				// return the new state with the new comment received from the server
 				return Object.assign({},
 					state,
@@ -30,11 +29,11 @@ const comments = (state= {
 				);
 
 			case REMOVE_COMMENT:
-
 				// return the new state without the removed comment
 				return Object.assign({},
 					state,
-					{ items:[
+					{
+						items:[
 
 						// from the start to the comment which we want to delete
 						...state.items.slice(0,action.index),

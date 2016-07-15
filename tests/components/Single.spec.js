@@ -23,16 +23,16 @@ const setup = () => {
 			isIncrementingLikes: false,
 			isFetching: false,
 			items: posts
-		}, 
+		},
 		params:{
   		postId: postId
-  	}, 
+  	},
 		comments:{
 			isFetching: false,
 			items: comments
-		}, 
-		increment: expect.createSpy(), 
-		addComment: expect.createSpy(), 
+		},
+		addCommentIfCan: expect.createSpy(),
+		increment: expect.createSpy(),
 		removeComment: expect.createSpy()
 	};
 	let renderer = TestUtils.createRenderer();
@@ -60,38 +60,38 @@ describe('Single component: ', () => {
 	})
 
 	it('Should render a Photo component and a Comments component as children', () => {
-		
+
 		expect(PhotoComponent).toExist();
 
 		expect(PhotoComponent.type).toEqual(Photo);
 
 		expect(CommentsComponent).toExist();
 
-		expect(CommentsComponent.type).toEqual(Comments);		
+		expect(CommentsComponent.type).toEqual(Comments);
 	})
 
 	it('Should trigger the increment function when the Photo increment is trigged', () => {
-						
-		expect(props.increment.calls.length).toBe(0);  	
 
-		PhotoComponent.props.increment(0);				
-		
-		expect(props.increment.calls.length).toBe(1);  								
+		expect(props.increment.calls.length).toBe(0);
+
+		PhotoComponent.props.increment(0);
+
+		expect(props.increment.calls.length).toBe(1);
 	})
 
 	it('Should trigger addComment and removeComment when the addComment and removeComment of Comments component are trigged', () => {
-						
-		expect(props.addComment.calls.length).toBe(0);  	
 
-		CommentsComponent.props.addComment(actions.addComment('BAhvZrRwcfu','xuxu', 'xuxu'));				
+		expect(props.addCommentIfCan.calls.length).toBe(0);
 		
-		expect(props.addComment.calls.length).toBe(1);  	
+		CommentsComponent.props.addComment(actions.addCommentIfCan('BAhvZrRwcfu','xuxu', 'xuxu'));
 
-		expect(props.removeComment.calls.length).toBe(0);  	
+		expect(props.addCommentIfCan.calls.length).toBe(1);
 
-		CommentsComponent.props.removeComment(actions.removeComment('BAhvZrRwcfu',0));				
-		
-		expect(props.removeComment.calls.length).toBe(1);  								
+		expect(props.removeComment.calls.length).toBe(0);
+
+		CommentsComponent.props.removeComment(actions.removeComment('BAhvZrRwcfu',0));
+
+		expect(props.removeComment.calls.length).toBe(1);
 	})
 
 })
