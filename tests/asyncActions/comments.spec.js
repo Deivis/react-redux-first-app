@@ -57,7 +57,7 @@ const setup = () => {
   }
 };
 
-describe('Async actions: ', () => {
+describe('Comments async actions: ', () => {
 
   afterEach(() => {
 
