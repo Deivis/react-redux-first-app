@@ -54,7 +54,7 @@ describe('comments reducer: ', () => {
 		expectedState = {
 			isFetching: false,
 			items: []
-		}
+		};
 
 		action = actions.deleteComment(postId,0);
 

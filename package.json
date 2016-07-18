@@ -43,7 +43,9 @@
   },
   "description": "Example used to learn redux with react",
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
     "babel-preset-react-hmre": "^1.1.1",
+    "eslint": "^2.13.1",
     "expect": "^1.20.1",
     "expect-jsx": "^2.5.1",
     "jsdomify": "^2.1.0",
@@ -68,6 +70,7 @@
     "build:webpack": "set NODE_ENV=production && webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "test": "set BABEL_ENV=test && mocha tests/**/*.spec.js --compilers js:babel-core/register",
+    "test:lint": "eslint . --ext .js --ext .jsx --ignore-path .gitignore --cache",
     "clean": "rimraf dist",
     "start": "set BABEL_ENV=development && node ./server/src/app.js"
   },

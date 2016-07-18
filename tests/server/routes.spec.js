@@ -1,8 +1,8 @@
-import request from 'supertest';  
+import request from 'supertest';
 
 import server from '../../server/src/app';
 
-import expect from 'expect';  
+import expect from 'expect';
 
 import posts from '../../server/src/data/posts';
 
@@ -16,14 +16,14 @@ describe('Routing', () => {
 		  .expect(200)
 		  .end(function(err, res){
 		    if (err) throw err;
-		    
+
 		    expect(res).toExist('The response object must exist');
 
-		    expect(res.ok).toBe(true,'The "ok" must to be true');	
-		    
-		    done();		    
+		    expect(res.ok).toBe(true,'The "ok" must to be true');
+
+		    done();
 		  });
-	})
+	});
 
 	it('Should return a json with all the posts', (done) =>{
 		request(server)
@@ -32,18 +32,18 @@ describe('Routing', () => {
 		  .expect(200)
 		  .end(function(err, res){
 		    if (err) throw err;
-		    
+
 		    let data = res.body;
 
 		    expect(res).toExist('The response object must exist');
-		    
-		    expect(data).toEqual(posts,'The body must to be an array of posts');	
 
-		    expect(data.length).toBeGreaterThan(0,'The response array can not to be empty');	
-		    
-		    done();		    
+		    expect(data).toEqual(posts,'The body must to be an array of posts');
+
+		    expect(data.length).toBeGreaterThan(0,'The response array can not to be empty');
+
+		    done();
 		  });
-	})
+	});
 
 	it('Should return a json with all the comments', (done) =>{
 		request(server)
@@ -52,17 +52,17 @@ describe('Routing', () => {
 		  .expect(200)
 		  .end(function(err, res){
 		    if (err) throw err;
-		    
+
 		    let data = res.body;
 
 		    expect(res).toExist('The response object must exist');
 
-		    expect(data).toBeA('object','The response data must be an object');	
+		    expect(data).toBeA('object','The response data must be an object');
 
-		    expect(data).toEqual(comments,'The body must to be an object of comments');	
-		    
-		    done();		    
+		    expect(data).toEqual(comments,'The body must to be an object of comments');
+
+		    done();
 		  });
-	})
+	});
 
-})
+});

@@ -4,11 +4,11 @@ import Photo from './Photo';
 
 import Comments from './Comments';
 
-class Single extends Component {  
+class Single extends Component {
 
 	componentDidMount() {
 		let {fetchCommentsIfNeeded, params} = this.props;
-		let {postId} = params;		
+		let {postId} = params;
     fetchCommentsIfNeeded(postId);
   }
 
@@ -17,15 +17,15 @@ class Single extends Component {
 		let postId = params.postId;
 		let i = posts.items.reduce((pp,cp,idx)=>{ return pp || (cp.code === postId ? idx : pp ); }, null);
 		let postComments = comments && comments.items ? comments.items : [];
-		let post = posts.items[i] || {}; 
-		
+		let post = posts.items[i] || {};
+
 		return (
-			<div className="single-photo">		
+			<div className="single-photo">
 
 				<Photo index={i} post={post} comments={postComments} increment={increment} isIncrementingLikes={posts.isIncrementingLikes} />
 
 				<Comments postId={postId} comments={postComments} addComment={addCommentIfCan} isFetching={comments.isFetching} removeComment={removeComment} />
-				
+
 			</div>
 		);
 	}
@@ -37,8 +37,8 @@ Single.propTypes = {
   fetchCommentsIfNeeded: PropTypes.func,
   increment: PropTypes.func,
   posts: PropTypes.object,
-  params: PropTypes.object, 
-  removeComment:  PropTypes.func  
-}
+  params: PropTypes.object,
+  removeComment:  PropTypes.func
+};
 
-export default Single; 
+export default Single;

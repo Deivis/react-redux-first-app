@@ -16,7 +16,7 @@ export const addCommentIfCan = (postId, author, comment, origin) => {
 			dispatch(postComment(postId));
 	   	return addComment(dispatch, { postId, author, comment }, origin);
     }
-  }
+  };
 };
 
 //Trigger a fetch call to save a comment into the server
@@ -31,13 +31,13 @@ const addComment = (dispatch, comment, origin) => {
  						})
 	      .then(response => response.json())
 	      .then(json => dispatch(receivePostedComment(comment.postId, json)));
-}
+};
 
 //Validates if a comment can be added
 const canAddComment = (state) => {
 
 	return !state.isFetching;
-}
+};
 
 //Remove comment if is possible
 export const removeComment = (postId, index, origin) => {
@@ -50,7 +50,7 @@ export const removeComment = (postId, index, origin) => {
 
 	   	return deleteCommentFromServer(dispatch, postId, index, origin);
     }
-  }
+  };
 };
 
 // Remove comment
@@ -71,7 +71,7 @@ const deleteCommentFromServer = (dispatch, postId, index, origin) =>{
 					 						})
 					    	.then(response => response.json())
 					      .then(json => dispatch(receiveRemovedCommentIndex(postId, json)));
-}
+};
 
 //Receive the removed comment old index
 const receiveRemovedCommentIndex = (postId,index) =>({
@@ -94,8 +94,8 @@ const fetchComments = (postId, origin) => {
     return window.fetch(uri)
 						      .then(response => response.json())
 						      .then(json => dispatch(receiveComments(postId, json)));
-  }
-}
+  };
+};
 
 //Validates if is possible fetch comments
 const shouldFetchComments = (state, postId) =>{
@@ -104,7 +104,7 @@ const shouldFetchComments = (state, postId) =>{
     return false;
   }
   return true;
-}
+};
 
 //Fetch comments if is necessery
 export const fetchCommentsIfNeeded = (postId, origin) => {
@@ -112,8 +112,8 @@ export const fetchCommentsIfNeeded = (postId, origin) => {
     if (shouldFetchComments(getState(), postId)) {
       return dispatch(fetchComments(postId, origin));
     }
-  }
-}
+  };
+};
 
 //Request the comments of a post to the server
 export const requestComments =(postId) =>({
@@ -134,7 +134,7 @@ export const receiveComments =(postId, json) =>({
 //Indicates a post were posted to the server
 export const postComment = (postId) =>({
 	type: types.POST_COMMENT
-})
+});
 
 //Receive the comments of a post from the server
 export const receivePostedComment =(postId, json) =>({
@@ -164,17 +164,17 @@ const fetchPosts = () => {
     return window.fetch('/posts')
 						      .then(response => response.json())
 						      .then(json => dispatch(receivePosts(json)));
-  }
-}
+  };
+};
 
 //Validates if is possible fetch posts
 const shouldFetchPosts = (state, action) => {
   const posts = state.posts;
   if (( posts && posts.items && posts.items.length > 0 ) || posts.isFetching) {
-    return false
+    return false;
   }
   return true;
-}
+};
 
 //Fetch posts if is necessery
 export const fetchPostsIfNeeded = () => {
@@ -182,5 +182,5 @@ export const fetchPostsIfNeeded = () => {
     if (shouldFetchPosts(getState())) {
       return dispatch(fetchPosts());
     }
-  }
-}
+  };
+};

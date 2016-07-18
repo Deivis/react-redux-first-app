@@ -25,7 +25,7 @@ const setup = () => {
    	comments:{
 			isFetching: false,
 			items: comments
-		}, 
+		},
 		fetchPostsIfNeeded: expect.createSpy(),
    	addComment: expect.createSpy(),
    	increment: expect.createSpy(),
@@ -40,8 +40,8 @@ const setup = () => {
 		props,
 		renderer,
 		component
-	}
-}
+	};
+};
 
 describe('Main component: ', () => {
 	const { props, component, renderer} = setup();
@@ -54,6 +54,6 @@ describe('Main component: ', () => {
 		expect(h1.type).toBe('h1');
 
 		expect(PhotoGridComponent.type).toEqual(PhotoGrid);
-	})
+	});
 
-})	
+});

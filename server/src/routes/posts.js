@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const posts  = require('../data/posts');
 const router = require('express').Router();
 

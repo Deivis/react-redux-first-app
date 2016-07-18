@@ -47,4 +47,4 @@ describe('posts reducer: ', () => {
     	.toEqual(expectedState);
   });
 
-})
+});

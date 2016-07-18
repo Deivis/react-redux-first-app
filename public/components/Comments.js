@@ -18,7 +18,7 @@ class Comments extends Component {
 				</p>
 
 			</div>
-		)
+		);
 	}
 
 	handleSubmit(postId, e){
@@ -64,6 +64,6 @@ Comments.propTypes = {
 	isFetching: PropTypes.bool.isRequired,
   postId: PropTypes.string.isRequired,
   removeComment:  PropTypes.func.isRequired
-}
+};
 
 export default Comments;

@@ -31,8 +31,8 @@ const setup = () => {
     props,
     component,
     renderer
-  }
-}
+  };
+};
 
 describe('Photo component:', () => {
 	const { props, component, renderer } = setup();
@@ -41,7 +41,7 @@ describe('Photo component:', () => {
 
     expect(component.type).toBe('figure');
     expect(component.props.className).toBe('grid-figure');
-	})
+	});
 
 	it('Should the component render two chilren, onde div with the class "grid-photo-wrap" and a figcaption element',() =>{
 		let [div,fig] = component.props.children;
@@ -50,7 +50,7 @@ describe('Photo component:', () => {
     expect(div.props.className).toBe('grid-photo-wrap');
 
     expect(fig.type).toBe('figcaption');
-	})
+	});
 
 	describe('Child div: ', () =>{
 		let [div,fig] = component.props.children;
@@ -65,7 +65,7 @@ describe('Photo component:', () => {
 			expect(ReactCSSTransitionGroup.props.transitionName).toBe('like');
 			expect(ReactCSSTransitionGroup.props.transitionEnterTimeout).toBeLessThanOrEqualTo(300);
 			expect(ReactCSSTransitionGroup.props.transitionLeaveTimeout).toBeLessThanOrEqualTo(300);
-		})
+		});
 
 		describe('Child Link: ', () => {
 			let img = Link.props.children;
@@ -76,8 +76,8 @@ describe('Photo component:', () => {
 				expect(img.props.className).toBe('grid-photo');
 				expect(img.props.src).toBe(props.post.display_src);
 				expect(img.props.alt).toBe(props.post.caption);
-			})
-		})
+			});
+		});
 
 		describe('Child CSSTransitionGroup: ', () => {
 			let span = ReactCSSTransitionGroup.props.children;
@@ -88,10 +88,10 @@ describe('Photo component:', () => {
 				expect(span.props.className).toBe('likes-heart');
 				expect(span.key).toEqual(props.post.likes);
 				expect(span.props.children).toEqual(props.post.likes);
-			})
-		})
+			});
+		});
 
-	})
+	});
 
 	describe('Child figcaption: ', () =>{
 		let [div,fig] = component.props.children;
@@ -101,68 +101,68 @@ describe('Photo component:', () => {
 
 			expect(p.type).toBe('p');
 			expect(divChild.type).toBe('div');
-		})
+		});
 
 		it('Should the paragraph text be equal to the post caption', () => {
 
 				expect(p.props.children).toEqual(props.post.caption);
-		})
+		});
 
 		describe('Child div: ',()=>{
-			let [button, Link] = divChild.props.children;
+				let [button, Link] = divChild.props.children;
 
-			it('Should the have two children, one button and a Link component', () => {
+				it('Should the have two children, one button and a Link component', () => {
 
-				expect(button.type).toBe('button');
+					expect(button.type).toBe('button');
 
-				expect(Link.type.displayName).toBe('Link');
-				expect(Link.props.to).toBe(`/view/${props.post.code}`);
-				expect(Link.props.className).toBe('button');
-			})
+					expect(Link.type.displayName).toBe('Link');
+					expect(Link.props.to).toBe(`/view/${props.post.code}`);
+					expect(Link.props.className).toBe('button');
+				});
 
-			describe('Child button: ', ()=>{
+				describe('Child button: ', ()=>{
 
-				it('Should have the class "likes" and the text with the tag "&hearts;" and the likes number',() => {
+					it('Should have the class "likes" and the text with the tag "&hearts;" and the likes number',() => {
 
-					expect(button.props.className).toBe('likes');
-					expect(button.props.children[1]).toEqual(props.post.likes);
-				})
+						expect(button.props.className).toBe('likes');
+						expect(button.props.children[1]).toEqual(props.post.likes);
+					});
 
-				it('Should trigger the increment function when is clicked',() => {
+					it('Should trigger the increment function when is clicked',() => {
 
-					expect(props.increment.calls.length).toBe(0);
+						expect(props.increment.calls.length).toBe(0);
 
-					button.props.onClick(0);
+						button.props.onClick(0);
 
-					expect(props.increment.calls.length).toBe(1);
-				})
+						expect(props.increment.calls.length).toBe(1);
+					});
 
-			})
+				});
 
-			describe('Child Link: ', () => {
-				let span = Link.props.children;
+				describe('Child Link: ', () => {
+					let span = Link.props.children;
 
-				it('Shoul have a span child with the class "comment-count"', ()=> {
+					it('Shoul have a span child with the class "comment-count"', ()=> {
 
-						expect(span.type).toBe('span');
-						expect(span.props.className).toBe('comment-count');
-				})
+							expect(span.type).toBe('span');
+							expect(span.props.className).toBe('comment-count');
+					});
 
-				describe('Child span: ', () => {
-				it('Shoul have a span child with the class "speech-bubble" and the sum of comments of the related post', ()=> {
-					let [spanChild, text] = span.props.children;
-					let len = props.comments ? props.comments.length: 0;
+					describe('Child span: ', () => {
+					it('Shoul have a span child with the class "speech-bubble" and the sum of comments of the related post', ()=> {
+						let [spanChild, text] = span.props.children;
+						let len = props.comments ? props.comments.length: 0;
 
-					expect(spanChild.type).toBe('span');
-					expect(spanChild.props.className).toBe('speech-bubble');
-					expect(text).toEqual(len);
-				})
-			})
+						expect(spanChild.type).toBe('span');
+						expect(spanChild.props.className).toBe('speech-bubble');
+						expect(text).toEqual(len);
+					});
+				});
 
-			})
+			});
 
-		})
+		});
 
-	})
+	});
 
-})
+});

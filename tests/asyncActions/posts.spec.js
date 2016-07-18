@@ -48,7 +48,7 @@ const setup = () => {
     origin,
     defaultState,
     postId
-  }
+  };
 };
 
 describe('Posts async actions: ', () => {
@@ -81,9 +81,6 @@ describe('Posts async actions: ', () => {
     };
 
     const store = mockStore(defaultState);
-
     
-
   });
-
 });

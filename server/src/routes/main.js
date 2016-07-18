@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const router = require('express').Router();
 const rootDir = process.cwd();
 const path = require('path');

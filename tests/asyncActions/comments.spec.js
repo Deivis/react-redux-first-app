@@ -54,7 +54,7 @@ const setup = () => {
     origin,
     defaultState,
     postId
-  }
+  };
 };
 
 describe('Comments async actions: ', () => {

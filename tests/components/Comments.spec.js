@@ -51,8 +51,8 @@ const setup = () => {
     renderer,
     component,
     renderedDOM
-  }
-}
+  };
+};
 
 describe('Comments component: ', () => {
 	const { output, props, renderer, component, renderedDOM } = setup();
@@ -63,7 +63,7 @@ describe('Comments component: ', () => {
   	//Comments component asserts
     expect(output.type).toBe('div');
     expect(output.props.className).toBe('comments');
-  })
+  });
 
 	it('Should render an array of divs and a form as children', () => {
     let [div] = divs;
@@ -75,7 +75,7 @@ describe('Comments component: ', () => {
 		// form asserts
     expect(form.type).toBe('form');
     expect(form.props.className).toBe('comment-form');
-  })
+  });
 
 	it('Should the form render onde span(overlay) and tree inputs: author, comment and submit', () => {
     	let [overlay, author, comment, submit] = form.props.children;
@@ -99,7 +99,7 @@ describe('Comments component: ', () => {
 			expect(submit.ref).toNotExist();
 			expect(submit.props.placeholder).toNotExist();
 			expect(submit.props.hidden).toBe(true);
-  })
+  });
 
   it('Should trigger addComment when the form is submmited', () => {
   	let formElement = TestUtils.findRenderedDOMComponentWithTag(component, 'form');
@@ -118,7 +118,7 @@ describe('Comments component: ', () => {
 
 		//asserting addComment was called
   	expect(props.addComment.calls.length).toBe(1);
-  })
+  });
 
   it('Should trigger removeComment when one button with the class "remove-comment" is clicked', () => {
   	let button =  TestUtils.findRenderedDOMComponentWithClass(component, 'remove-comment');
@@ -131,7 +131,6 @@ describe('Comments component: ', () => {
 
 		//asserting removeComment was called
 		expect(props.removeComment.calls.length).toBe(1);
-  })
+  });
 
-
-})
+});

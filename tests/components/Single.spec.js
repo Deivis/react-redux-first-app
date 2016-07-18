@@ -43,8 +43,8 @@ const setup = () => {
 		props,
 		renderer,
 		component
-	}
-}
+	};
+};
 
 describe('Single component: ', () => {
 	const { props, component, renderer} = setup();
@@ -57,7 +57,7 @@ describe('Single component: ', () => {
 		expect(component.type).toBe('div');
 
 		expect(component.props.className).toBe('single-photo');
-	})
+	});
 
 	it('Should render a Photo component and a Comments component as children', () => {
 
@@ -68,7 +68,7 @@ describe('Single component: ', () => {
 		expect(CommentsComponent).toExist();
 
 		expect(CommentsComponent.type).toEqual(Comments);
-	})
+	});
 
 	it('Should trigger the increment function when the Photo increment is trigged', () => {
 
@@ -77,12 +77,12 @@ describe('Single component: ', () => {
 		PhotoComponent.props.increment(0);
 
 		expect(props.increment.calls.length).toBe(1);
-	})
+	});
 
 	it('Should trigger addComment and removeComment when the addComment and removeComment of Comments component are trigged', () => {
 
 		expect(props.addCommentIfCan.calls.length).toBe(0);
-		
+
 		CommentsComponent.props.addComment(actions.addCommentIfCan('BAhvZrRwcfu','xuxu', 'xuxu'));
 
 		expect(props.addCommentIfCan.calls.length).toBe(1);
@@ -92,6 +92,6 @@ describe('Single component: ', () => {
 		CommentsComponent.props.removeComment(actions.removeComment('BAhvZrRwcfu',0));
 
 		expect(props.removeComment.calls.length).toBe(1);
-	})
+	});
 
-})
+});

@@ -20,11 +20,11 @@ const setup = () => {
    		isIncrementingLikes: false,
 			isFetching: false,
    		items:posts
-   	}, 
+   	},
    	comments: {
 			isFetching: false,
    		items:comments
-   	}, 
+   	},
    	increment: expect.createSpy()
   };
 
@@ -36,8 +36,8 @@ const setup = () => {
     props,
     component,
     renderer
-  }
-}
+  };
+};
 
 describe('PhotoGrid component: ', () => {
 	const { props, component, renderer} = setup();
@@ -47,14 +47,14 @@ describe('PhotoGrid component: ', () => {
 		expect(component).toExist();
 		expect(component.type).toBe('div');
 		expect(component.props.className).toBe('photo-grid');
-	})
+	});
 
 	it('Should render a list of Photo components', () => {
 		let children = component.props.children;
 		let firstChild = children[0];
-		
+
 		expect(firstChild).toExist();
 		expect(firstChild.type).toEqual(Photo);
-	})
+	});
 
-})
+});
