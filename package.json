@@ -46,6 +46,7 @@
     "babel-eslint": "^6.1.2",
     "babel-preset-react-hmre": "^1.1.1",
     "eslint": "^2.13.1",
+    "eslint-loader": "^1.4.1",
     "expect": "^1.20.1",
     "expect-jsx": "^2.5.1",
     "jsdomify": "^2.1.0",

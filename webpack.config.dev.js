@@ -21,12 +21,12 @@ module.exports = {
     // js
     {
       test: /\.js$/,
-      loaders: ['babel'],
+      loaders: ['babel','eslint'],
       include: path.join(__dirname, 'public')
     },
     // CSS
-    { 
-      test: /\.styl$/, 
+    {
+      test: /\.styl$/,
       include: path.join(__dirname, 'public'),
       loader: 'style-loader!css-loader!stylus-loader'
     }
